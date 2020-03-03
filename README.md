@@ -62,7 +62,10 @@ A dockerfile is provided for those who want to make it production ready, statele
 ```
 sudo docker run --rm -ti --net=host  smartreply_rt
 ```
-You can disable host-networking mode by providing a port mapping using `-p` option and attach the flask server on `0.0.0.0` by modifying `server.py`.
+You can disable host-networking mode by providing a port mapping using `-p` option and attach the flask server on `0.0.0.0` by modifying `server.py` as :
+```python3
+app.run(host = '0.0.0.0')
+```
 
 ### Building on your own 
 If you want to build on your own, you can start by setting up the build environment, Install bazel, and pybind11 and follow the steps :
