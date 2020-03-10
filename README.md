@@ -67,6 +67,32 @@ You can disable host-networking mode by providing a port mapping using `-p` opti
 app.run(host = '0.0.0.0')
 ```
 
+### Deploying with Kubernetes
+Once you have built docker image of smart-reply runtime you can easily deploy it on kubernetes cluser, it can be a snadbox minikube cluster or a production grade multi-node cluster. Assuming that you have set-up a kubernetes environment on your machine you can create a new deployment using `kubernetes/deploy.yaml` file. Just execute :
+```
+kubectl create -f kubernetes/deploy.yaml
+```
+This should create a deployment with four replicated pods you can customize this by changing `replicas: 4` under `spec` section of deployment file, also feel free to tweak or add new parameters. As a next step you will expose the service using the following command , the LoadBalancer will take care of balancing the workload across 4 replicated pods.
+```
+kubectl expose deployment smartreply-deployment --type=LoadBalancer --name=smartreply-connector
+```
+Checkout whether the service is created and has exposed the right port :
+```
+kubectl get services
+```
+This outputs :
+```
+NAME                   TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes             ClusterIP      10.96.0.1       <none>        443/TCP          35m
+smartreply-connector   LoadBalancer   10.108.132.98   <pending>     5000:30662/TCP   16m
+```
+Note that port 5000 is exposed, so now we can access this port using cluster ip. Note down the newly assigned port.
+
+Let's make a batch prediction now :
+```
+curl -d '{"input" : ["hello", "hi"]}' -H "Content-Type:application/json" http://your-cluster-ip:30662/api/inference
+```
+
 ### Building on your own 
 If you want to build on your own, you can start by setting up the build environment, Install bazel, and pybind11 and follow the steps :
 
