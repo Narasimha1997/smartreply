@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smartreply-deployment
+  labels:
+    app: smartreply
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: smartreply
+  template:
+    metadata:
+      labels:
+        app: smartreply
+    spec:
+      containers:
+      - name: smartreply-docker
+        image: smartreply_rt:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
