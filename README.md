@@ -24,6 +24,14 @@ and the wrapper `inference.cc` I wrote to wrap the framework, the codebase has `
 
 ### Direct run on x86_64 architecture :
 If you are deploying on a x86_64 machine, you can directly utilize the pre-built shared library provided in the repo, by importing `smartreply` python module.
+
+Here are some requirements that must be satisfied before you use the `.so` directly:
+1. Python3.6
+2. Linux Kernel 
+3. POSIX ABI
+
+This can be infered from the cpython extension `cpython36m-x86_64.linux.gnu.so`
+
 To use smart-reply model : 
 ```python
 from runtime import SmartReplyRuntime
