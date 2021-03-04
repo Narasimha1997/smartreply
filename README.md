@@ -1,6 +1,8 @@
 # smartreply
 Unofficial port of Google's smart reply runtime (powers gmail and assistant) model to python, allowing developers to leverage intelligent smart reply as an API in Web and embedded systems that supports Linux, a loader (ld.so), a fully POSIX C++ Runtime and Python interpreter.
 
+Check the new repository : [py-smartreply](https://github.com/Narasimha1997/py-smartreply)
+
 ### How it works ?
 Recently Google released a smart-reply on-device TFLite model, this model has smaller memory footprint and runs on Android Platform. This model powers on-device
 smart-reply applications. I made an attempt to run the same model on Linux machine, however it failed because the model required a runtime and a set of plugins that does
